@@ -23,3 +23,7 @@ The dataset is sourced from the official **Fragile States Index 2023**, which me
 ```bash
 pip install -r requirements.txt
 streamlit run fsi_app.py
+## 🌐 Live App
+
+👉 [Launch FSI 2023 Dashboard](https://your-username-your-repo.streamlit.app)
+
