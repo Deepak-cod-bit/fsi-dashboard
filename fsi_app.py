@@ -122,7 +122,7 @@ selected_scores = row[numeric_mll.columns]
 fig4, ax4 = plt.subplots(figsize=(12, 6))
 x = numeric_mll.columns
 ax4.plot(x, global_avg, label='Global Avg', marker='o', linestyle='--')
-ax4.plot(x, selected_scores, label=f'📌 {country}', marker='o')
+ax4.plot(x, selected_scores, label=f' {country}', marker='o')
 ax4.set_xticks(range(len(x)))
 ax4.set_xticklabels(x, rotation=45, ha="right")
 ax4.set_title(f"{country} vs Global Average Across Indicators")
