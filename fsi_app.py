@@ -60,14 +60,14 @@ st.markdown("""
 """.format(row["Total"]), unsafe_allow_html=True)
 
 
-st.subheader("🔴High Risk Indicators (Score > 9.0)")
+st.subheader("High Risk Indicators (Score > 9.0)")
 for col in mll.columns[4:]:
     value = row[col]
     if pd.notna(value) and value > 9.0:
         st.write(f"**{col}**: {value:.2f}")
 
 
-st.subheader("📋 Summary by Category")
+st.subheader(" Summary by Category")
 st.markdown(f"""
 - **Economic:**  
   - Economy: {row['E1: Economy']}  
@@ -83,7 +83,7 @@ st.markdown(f"""
 """)
 
 
-st.subheader("📊 Indicator Correlation Heatmap")#heat6map
+st.subheader(" Indicator Correlation Heatmap")#heat6map
 numeric_mll = mll.select_dtypes(include='number').drop(columns=['Year'])
 correlation = numeric_mll.corr()
 
@@ -92,7 +92,7 @@ sns.heatmap(correlation, ax=ax, cmap="coolwarm", annot=True)
 st.pyplot(fig)
 
 
-st.subheader("🚨 Top 10 Most Fragile Countries")#top 10 count
+st.subheader("Top 10 Most Fragile Countries")#top 10 count
 top_10 = mll.sort_values(by="Total", ascending=False).head(10)
 fig2, ax2 = plt.subplots(figsize=(10, 6))
 sns.barplot(data=top_10, x="Total", y="Country", palette="Reds_d", ax=ax2)
@@ -100,12 +100,12 @@ ax2.set_title("Top 10 Most Fragile Countries")
 st.pyplot(fig2)
 
 
-st.subheader("📐 Statistical Summary of All Countries")
+st.subheader(" Statistical Summary of All Countries")
 summary_df = numeric_mll.describe().T[["mean", "50%", "std"]]
 summary_df.rename(columns={"50%": "median"}, inplace=True)
 st.dataframe(summary_df.style.format("{:.2f}").background_gradient(cmap="Blues"))
 
-st.subheader("📈 Distribution of Total FSI Scores")#distribution graph
+st.subheader("Distribution of Total FSI Scores")#distribution graph
 fig3, ax3 = plt.subplots(figsize=(10, 5))
 sns.histplot(data=mll, x="Total", bins=20, kde=True, color="skyblue", ax=ax3)
 ax3.set_title("Distribution of Total Fragility Scores")
@@ -115,13 +115,13 @@ st.pyplot(fig3)
 
 
 
-st.subheader("📊 Country vs Global Average Across Indicators")
+st.subheader(" Country vs Global Average Across Indicators")
 global_avg = numeric_mll.mean()
 selected_scores = row[numeric_mll.columns]
 
 fig4, ax4 = plt.subplots(figsize=(12, 6))
 x = numeric_mll.columns
-ax4.plot(x, global_avg, label='🌍 Global Avg', marker='o', linestyle='--')
+ax4.plot(x, global_avg, label='Global Avg', marker='o', linestyle='--')
 ax4.plot(x, selected_scores, label=f'📌 {country}', marker='o')
 ax4.set_xticks(range(len(x)))
 ax4.set_xticklabels(x, rotation=45, ha="right")
